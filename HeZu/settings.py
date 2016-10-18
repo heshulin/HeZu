@@ -77,10 +77,15 @@ WSGI_APPLICATION = 'HeZu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'hezu',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '183.175.14.250',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
