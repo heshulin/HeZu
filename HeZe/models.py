@@ -5,6 +5,7 @@ from django.db import models
 class User(models.Model):
     UserId = models.IntegerField(primary_key=True)
     PassWord = models.CharField(max_length=255)
+    UserPhoto = models.CharField(max_length=255)
     TrueName = models.CharField(max_length=255)
     Address = models.CharField(max_length=255)
     UserPhone = models.CharField(max_length=255)
