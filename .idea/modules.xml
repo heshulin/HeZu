@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HeZu.iml" filepath="$PROJECT_DIR$/.idea/HeZu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../图书管理系统/.idea/图书管理系统.iml" filepath="$PROJECT_DIR$/../图书管理系统/.idea/图书管理系统.iml" />
     </modules>
   </component>
 </project>
