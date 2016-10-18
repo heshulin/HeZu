@@ -8,7 +8,7 @@ import json
 
 
 def login(request):
-    TelNumber = request.form.get('TelBumber')
-    PassWord = request.form.get('PassWord')
-    return HttpResponse(json.dumps(dologin(TelNumber, PassWord),content_type="application/json"))
+    UserPhone = request.POST.get('UserPhone')
+    PassWord = request.POST.get('PassWord')
+    return HttpResponse(dologin(UserPhone,PassWord)['msg'])
 
