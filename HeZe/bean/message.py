@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import httplib2
 import hashlib
-from app.bean.rand import rand
+from HeZe.bean.rand import rand
 
 
 class Message(object):

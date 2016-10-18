@@ -4,7 +4,7 @@ import os
 import json
 import unittest
 import logging
-from app.bean.rong import ApiClient
+from HeZe.bean.rong import ApiClient
 logging.basicConfig(level=logging.INFO)
 
 
