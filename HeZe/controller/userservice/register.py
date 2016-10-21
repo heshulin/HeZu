@@ -42,7 +42,7 @@ class registe():
         try:
             if UserPhone and Checkcode and NickName and PassWord:
                 c = Checkcode.objects.filter(UserPhone=UserPhone, CheckCode=CheckCode).order_by('-CheckCodeId').first()
-                t = datetime.datetime.now() + datetime.timedelta(hours=8) - datetime.timedelta(minutes=3)
+                t = datetime.datetime.now() - datetime.timedelta(minutes=3)
                 if c:
                     c.SendTime = c.SendTime.replace(tzinfo=None)
                     if t > c.SendTime:
@@ -51,7 +51,7 @@ class registe():
                     else:
                         u = User()
                         u.UserPhone = UserPhone
-                        u.PassWord = encrypt(PassWord)
+                        u.PassWord = encrypt(PassWord.encode('utf8'))
                         u.Label1 = '0'
                         u.Label2 = '0'
                         u.Label3 = '0'

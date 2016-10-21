@@ -6,11 +6,12 @@ from HeZe.bean.secretkey import GetSecretKey
 def dologin(UserPhone, PassWord):
     try:
         if UserPhone and PassWord:
-            PassWord = encrypt(PassWord)
-            u = User.objects.filter(UserPhone=UserPhone, PassWord=PassWord)
+            PassWord = encrypt(PassWord.encode('utf8'))
+            u = User.objects.get(UserPhone=UserPhone, PassWord=PassWord)
             if not u:
                 state = 0
                 msg = '用户名或密码错误'
+                SecretKey = None
             else:
                 SecretKey = GetSecretKey()
                 u.SecretKey = SecretKey
@@ -20,12 +21,15 @@ def dologin(UserPhone, PassWord):
         else:
             state = 0
             msg = '用户名密码不能为空'
+            SecretKey = None
     except Exception as e:
         print(e)
         state = 0
         msg = '服务器异常'
+        SecretKey = None
     array = {
         'state': state,
-        'msg': msg
+        'msg': msg,
+        'SecretKey': SecretKey
     }
     return array
