@@ -14,7 +14,6 @@ class Message(object):
         try:
             len = 6
             CheckCode = rand(len)
-            print(CheckCode)
             content = "【爱大学】，您的验证码为" + CheckCode + "在3分钟内有效"
             url = "http://www.smsbao.com/sms?u=" + str(self.UserName)
             url = url + "&p=" + self.PassWord
@@ -23,6 +22,7 @@ class Message(object):
             url = url + "&c=" + content
             conn = httplib2.Http()
             resp, content = conn.request(url, "GET")
+            print(CheckCode)
             return CheckCode
         except Exception as e:
             print(e)

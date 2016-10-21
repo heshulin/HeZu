@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from HeZe.view.userviews import login
+from HeZe.view.userviews import login, sendmessage, reg
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', login),
+    url(r'^sendmessage/', sendmessage),
+    url(r'^reg/', reg)
 ]

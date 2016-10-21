@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import string, random
+import random
 
 
 def rand(n):

@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
-from app.config import ALLOWED_EXTENSIONS
-from app.bean.qiniuup import Qiniuup
+from HeZe.config import ALLOWED_EXTENSIONS
+from HeZe.bean.qiniuup import Qiniuup
 from werkzeug.utils import secure_filename
-from app import app
 from app.config import UPLOAD_FOLDER
 import os
 from app.bean.usetphotorandom import Userphotorandom
