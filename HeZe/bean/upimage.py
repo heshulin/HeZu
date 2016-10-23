@@ -1,52 +1,40 @@
-# -*- coding:utf-8 -*-
-from HeZe.config import ALLOWED_EXTENSIONS
-from HeZe.bean.qiniuup import Qiniuup
-from werkzeug.utils import secure_filename
-from app.config import UPLOAD_FOLDER
-import os
-from app.bean.usetphotorandom import Userphotorandom
+# -*- coding:utf-8 -*
+from HeZe.bean.qiniuup import up
+from HeZe.bean.usetphotorandom import getuserphotorandom
+from PIL import Image
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_TYPE = ['png', 'jpeg', 'jpg']
 
 
 class upimage(object):
 
-    def allowed_file(self, filename):
-        return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+    def allowed_file(self, filetype):
+        return filetype in ALLOWED_TYPE
 
     def upuserphoto(self, file, Space):
         try:
-            file.filename = file.filename
-            if file and self.allowed_file(file.filename):
-                qiniuup = Qiniuup()
-                userphotorandom = Userphotorandom()
+            img = Image.open(file)
+            type = img.format()
+            if file and self.allowed_file(type):
                 # 图片名字
-                file.filename = userphotorandom.getuserphotorandom() + '.png'
-                fname = secure_filename(file.filename)
-
-                file.save(os.path.join(UPLOAD_FOLDER, fname))
-                print(UPLOAD_FOLDER + file.filename)
-                str = qiniuup.up(UPLOAD_FOLDER + file.filename, Space)
-                array = {
-                    'state':'1',
-                    'msg':'上传成功',
-                    'url':str
-                }
-                return array
+                #img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
+                filename = getuserphotorandom() + '.png'
+                path = 'C:/images' + filename
+                img.save(path, "png")  # 保存图片
+                url = up(path, Space)
+                state = 1
+                msg = '上传成功'
             else:
                 msg = "请合法上传！"
                 state = '0'
-                array = {
-                    'state': state,
-                    'msg': msg,
-                    'url': ''
-                }
-                return array
+                url = ''
         except Exception as e:
             state = 0
             msg = "出现未知的错误了哦~，再试试吧"
-            array = {
-                'state': state,
-                'msg': msg
-            }
-            return array
+            url = ''
+        array = {
+            'state': state,
+            'msg': msg,
+            'url': url
+        }
+        return array

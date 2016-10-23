@@ -2,7 +2,11 @@ from django.http import HttpResponse
 from HeZe.controller.userservice.login import dologin
 from HeZe.controller.userservice.register import registe
 from django.views.decorators.csrf import csrf_exempt
+from HeZe.controller.userservice.revisepsw import revisepsw
+from HeZe.controller.userservice.logout import logout
+from HeZe.controller.userservice.revisephoto import revisephoto
 import json
+
 
 # Create your views here.
 
@@ -16,6 +20,17 @@ def login(request):
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
+    except Exception as e:
+        print(e)
+
+
+@csrf_exempt
+def logout(request):
+    try:
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        result = json.dumps(logout(UserPhone,SecretKey))
+        return HttpResponse(result, content_type="application/json")
     except Exception as e:
         print(e)
 #end
@@ -47,6 +62,32 @@ def reg(request):
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
+    except Exception as e:
+        print(e)
+#end
+
+
+#修改资料模块
+@csrf_exempt
+def revisepsw(request):
+    try:
+        UserPhone = request.POST.get('UserPhone')
+        OldPassWord = request.POST.get('OldPassWord')
+        NewPassWord = request.POST.get('NewPassWord')
+        result = json.dumps(revisepsw(UserPhone,OldPassWord,NewPassWord))
+        return HttpResponse(result, content_type="application/json")
+    except Exception as e:
+        print(e)
+
+
+@csrf_exempt
+def revisephoto(request):
+    try:
+        UserPhoto = request.FILES['UserPhoto']
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        result = json.dumps(revisephoto(UserPhone, SecretKey, UserPhoto))
+        return HttpResponse(result, content_type="application/json")
     except Exception as e:
         print(e)
 #end
