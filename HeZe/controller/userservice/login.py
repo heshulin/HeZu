@@ -7,7 +7,7 @@ def dologin(UserPhone, PassWord):
     try:
         if UserPhone and PassWord:
             PassWord = encrypt(PassWord.encode('utf8'))
-            u = User.objects.get(UserPhone=UserPhone, PassWord=PassWord)
+            u = User.objects.filter(UserPhone=UserPhone, PassWord=PassWord).first()
             if not u:
                 state = 0
                 msg = '用户名或密码错误'

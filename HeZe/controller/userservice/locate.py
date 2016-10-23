@@ -3,9 +3,9 @@ from HeZe.controller.userservice.islog import islog
 
 def doLocate(Adress, UserPhone, SecretKey):
     try:
-        result = islog(UserPhone,SecretKey)
-        if result['state'] == 1:
-            u = result['user']
+        state, user = islog(UserPhone, SecretKey)
+        if state == 1:
+            u = user
             u.Adress = Adress
             u.save()
             msg = '定位成功'

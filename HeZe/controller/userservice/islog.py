@@ -14,8 +14,4 @@ def islog(UserPhone, SecretKey):
         state = 0
         user = None
         print(e)
-    array = {
-        'state': state,
-        'user': user
-    }
-    return array
+    return state, user
