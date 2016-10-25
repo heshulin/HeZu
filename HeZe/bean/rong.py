@@ -17,7 +17,6 @@ class ApiClientBase(object):
     def __init__(self, key=None, secret=None):
         self._app_key = key
         self._app_secret = secret
-
         if self._app_key is None:
             self._app_key = os.environ.get('rongcloud_app_key', '')
         if self._app_secret is None:

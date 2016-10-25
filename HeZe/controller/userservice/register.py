@@ -40,7 +40,7 @@ class registe():
 
     def sendcheckcode(self, UserPhone, CheckCode, NickName, PassWord):
         try:
-            if UserPhone and Checkcode and NickName and PassWord:
+            if UserPhone and CheckCode and NickName and PassWord:
                 c = Checkcode.objects.filter(UserPhone=UserPhone, CheckCode=CheckCode).order_by('-CheckCodeId').first()
                 t = datetime.datetime.now() - datetime.timedelta(minutes=3)
                 if c:

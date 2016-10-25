@@ -14,7 +14,7 @@ class Message(object):
         try:
             len = 6
             CheckCode = rand(len)
-            content = "【爱大学】，您的验证码为" + CheckCode + "在3分钟内有效"
+            content = "【合租】，您的验证码为" + CheckCode + "在3分钟内有效，请勿泄露验证码给他人"
             url = "http://www.smsbao.com/sms?u=" + str(self.UserName)
             url = url + "&p=" + self.PassWord
             url = url + "&m="

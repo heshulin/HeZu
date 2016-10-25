@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from HeZe.controller.userservice.login import dologin
 from HeZe.controller.userservice.register import registe
 from django.views.decorators.csrf import csrf_exempt
-from HeZe.controller.userservice.revisepsw import revisepsw
+from HeZe.controller.userservice.revisepsw import revisepsw, resetpsw
 from HeZe.controller.userservice.logout import logout
 from HeZe.controller.userservice.revisephoto import revisephoto
 import json
@@ -19,9 +19,10 @@ def login(request):
         result = json.dumps(dologin(UserPhone, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-        return response
     except Exception as e:
         print(e)
+        response = HttpResponse('服务器异常')
+    return response
 
 
 @csrf_exempt
@@ -30,9 +31,12 @@ def logout(request):
         UserPhone = request.POST.get('UserPhone')
         SecretKey = request.POST.get('SecretKey')
         result = json.dumps(logout(UserPhone,SecretKey))
-        return HttpResponse(result, content_type="application/json")
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
+        response = HttpResponse('服务器异常')
+    return response
 #end
 
 
@@ -45,9 +49,10 @@ def sendmessage(request):
         result = json.dumps(r.sendmessage(UserPhone))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-        return response
     except Exception as e:
         print(e)
+        response = HttpResponse('服务器异常')
+    return response
 
 
 @csrf_exempt
@@ -61,9 +66,10 @@ def reg(request):
         result = json.dumps(r.sendcheckcode(UserPhone, CheckCode, NickName, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-        return response
     except Exception as e:
         print(e)
+        response = HttpResponse('服务器异常')
+    return response
 #end
 
 
@@ -75,9 +81,12 @@ def revisepsw(request):
         OldPassWord = request.POST.get('OldPassWord')
         NewPassWord = request.POST.get('NewPassWord')
         result = json.dumps(revisepsw(UserPhone,OldPassWord,NewPassWord))
-        return HttpResponse(result, content_type="application/json")
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
+        response = HttpResponse('服务器异常')
+    return response
 
 
 @csrf_exempt
@@ -87,9 +96,27 @@ def revisephoto(request):
         UserPhone = request.POST.get('UserPhone')
         SecretKey = request.POST.get('SecretKey')
         result = json.dumps(revisephoto(UserPhone, SecretKey, UserPhoto))
-        return HttpResponse(result, content_type="application/json")
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
+        response = HttpResponse('服务器异常')
+    return response
+
+
+@csrf_exempt
+def resetpsw(request):
+    try:
+        UserPhone = request.POST.get('UserPhone')
+        PassWord = request.POST.get('PassWord')
+        CheckCode = request.POST.get('CheckCode')
+        result = json.dumps(resetpsw(UserPhone, CheckCode, PassWord))
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
+    except Exception as e:
+        print(e)
+        response = HttpResponse('服务器异常')
+    return response
 #end
 
 
