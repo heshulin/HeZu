@@ -16,6 +16,7 @@ class Imservice(object):
             r = api.getToken(userId=user.UserId, name=user.NickName,portraitUri=user.UserPhoto)
             r = str(r)
             r = eval(r)
+            print(r)
             user.Token = r['token']
             user.save()
             return r['token']
