@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from HeZe.view.userviews import login, sendmessage, reg, logout, revisepsw, revisephoto, resetpsw
 from HeZe.view.hezuview import hezuinfors, sendhezu
+from HeZe.view.imview import gettoken,getfriends,attention
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +30,7 @@ urlpatterns = [
     url('revisepsw', revisepsw),
     url('revisephoto', revisephoto),
     url('resetpsw', resetpsw),
+    url('gettoken', gettoken),
+    url('getfriends', getfriends),
+    url('attention', attention),
 ]
