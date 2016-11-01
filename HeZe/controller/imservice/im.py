@@ -25,7 +25,6 @@ class Imservice(object):
 
     def getfriends(self,UserPhone,SecretKey):
         try:
-
             user = User.objects.filter(UserPhone=UserPhone).first()
             if SecretKey == user.SecretKey:
                 friends = Attention.objects.filter(UserId=user.UserId).all()
