@@ -18,6 +18,7 @@ from django.contrib import admin
 from HeZe.view.userviews import login, sendmessage, reg, logout, revisepsw, revisephoto, resetpsw
 from HeZe.view.hezuview import hezuinfors, sendhezu
 from HeZe.view.imview import gettoken,getfriends,attention
+from HeZe.view.circleview import sendcircle,circleinfo,circleoneinfo,sendcomment,commentinfo
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,4 +34,9 @@ urlpatterns = [
     url('gettoken', gettoken),
     url('getfriends', getfriends),
     url('attention', attention),
+    url('sendcircle', sendcircle),
+    url('circleinfo', circleinfo),
+    url('circleoneinfo', circleoneinfo),
+    url('sendcomment', sendcomment),
+    url('commentinfo', commentinfo),
 ]
