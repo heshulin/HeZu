@@ -43,3 +43,28 @@ def hezuinfors(request):
         response = HttpResponse('服务器异常')
     return response
 #end
+
+
+#撤销合租
+@csrf_exempt
+def canclehezu(request):
+    try:
+        UserPhone = request.GET.get('UserPhone')
+        SecretKey = request.GET.get('SecretKey')
+        SendHezuId = request.GET.get('SendHezuId')
+        state, user = islog(UserPhone, SecretKey)
+        if state == 1:
+            h = hezu()
+            array = h.canclehezu(user.UserId, SendHezuId)
+        else:
+            array = {
+                'state': 0,
+                'msg': '请登录'
+            }
+        result = json.dumps(array)
+        response = HttpResponse(result, content_type='application/json')
+    except Exception as e:
+        print(e)
+        response = HttpResponse('服务器异常')
+    return response
+#end

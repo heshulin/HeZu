@@ -2,6 +2,7 @@ from HeZe.models import SendHezu
 from HeZe.bean.upimage import upimage
 
 class hezu():
+
     def sendhezu(self, UserId, Information, Address, Picture, Number):
         try:
             if Information and Address and Picture and Number:
@@ -33,6 +34,7 @@ class hezu():
             'state': state
         }
         return  array
+
     def allinfors(self):
         try:
             s = SendHezu.objects.filter().order_by('-SendHezuId').all()
@@ -62,7 +64,35 @@ class hezu():
             'num': num
         }
         return array
-    def delhezu(self, UserPhone, SecretKey, SendHeZuId):
-        pass
+
+    def canclehezu(self, UserId, SendHeZuId):
+        try:
+            if SendHeZuId:
+                s = SendHezu.objects.filter(SendHeZuId=SendHeZuId, UserId=UserId).first()
+                if s:
+                    if s.Delete == 0:
+                        s.Delete = 1
+                        s.save()
+                        state = 1
+                        msg = '撤销成功'
+                    else:
+                        state = 1
+                        msg = '撤销成功'
+                else:
+                    state = 0
+                    msg = '操作非法'
+            else:
+                state = 0
+                msg = '请登录'
+        except Exception as e:
+            print(e)
+            state = 0
+            msg = '服务器错误'
+        array = {
+            'state': state,
+            'msg': msg
+        }
+        return array
+
 
 
