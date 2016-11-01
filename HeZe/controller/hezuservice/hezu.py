@@ -62,5 +62,7 @@ class hezu():
             'num': num
         }
         return array
+    def delhezu(self, UserPhone, SecretKey, SendHeZuId):
+        pass
 
 
