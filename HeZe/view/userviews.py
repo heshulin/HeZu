@@ -16,7 +16,6 @@ def login(request):
     try:
         UserPhone = request.POST.get('UserPhone')
         PassWord = request.POST.get('PassWord')
-        print(UserPhone)
         result = json.dumps(dologin(UserPhone, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
