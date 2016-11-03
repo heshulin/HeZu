@@ -5,6 +5,7 @@ from HeZe.controller.imservice.im import Imservice
 
 
 def dologin(UserPhone, PassWord):
+    token = ""
     try:
         if UserPhone and PassWord:
             PassWord = encrypt(PassWord.encode('utf8'))
