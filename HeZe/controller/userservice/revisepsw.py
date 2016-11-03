@@ -26,7 +26,7 @@ def revisepsw(UserPhone, OldPassWord, NewPassWord):
     return array
 
 
-def resetpsw(self, UserPhone, CheckCode, PassWord):
+def Resetpsw(self, UserPhone, CheckCode, PassWord):
     try:
         if UserPhone and Checkcode and PassWord:
             c = Checkcode.objects.filter(UserPhone=UserPhone, CheckCode=CheckCode).order_by('-CheckCodeId').first()

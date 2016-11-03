@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from HeZe.controller.userservice.login import dologin
 from HeZe.controller.userservice.register import registe
 from django.views.decorators.csrf import csrf_exempt
-from HeZe.controller.userservice.revisepsw import revisepsw, resetpsw
+from HeZe.controller.userservice.revisepsw import revisepsw, Resetpsw
 from HeZe.controller.userservice.logout import logout
 from HeZe.controller.userservice.revisephoto import revisephoto
 import json
@@ -110,7 +110,7 @@ def resetpsw(request):
         UserPhone = request.POST.get('UserPhone')
         PassWord = request.POST.get('PassWord')
         CheckCode = request.POST.get('CheckCode')
-        result = json.dumps(resetpsw(UserPhone, CheckCode, PassWord))
+        result = json.dumps(Resetpsw(UserPhone, CheckCode, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:

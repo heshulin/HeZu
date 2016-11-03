@@ -1,6 +1,7 @@
 from HeZe.models import User
 from HeZe.bean.md5 import encrypt
 from HeZe.bean.secretkey import GetSecretKey
+from HeZe.controller.imservice.im import Imservice
 
 
 def dologin(UserPhone, PassWord):
@@ -13,6 +14,8 @@ def dologin(UserPhone, PassWord):
                 msg = '用户名或密码错误'
                 SecretKey = None
             else:
+                IM = Imservice()
+                token = IM.gettoken(UserPhone=UserPhone)
                 SecretKey = GetSecretKey()
                 u.SecretKey = SecretKey
                 u.save()
@@ -28,6 +31,7 @@ def dologin(UserPhone, PassWord):
         msg = '服务器异常'
         SecretKey = None
     array = {
+        'token': token,
         'state': state,
         'msg': msg,
         'SecretKey': SecretKey
