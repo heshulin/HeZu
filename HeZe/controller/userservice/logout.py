@@ -1,11 +1,12 @@
 from HeZe.models import User
+from HeZe.bean.secretkey import GetSecretKey
 
 
 def logout(UserPhone, SecretKey):
     try:
         u = User.objects.get(UserPhone=UserPhone, SecretKey=SecretKey)
         if u:
-            u.SecretKey = ''
+            u.SecretKey = GetSecretKey()
             u.save()
             msg = '成功'
             state = 1
