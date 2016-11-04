@@ -43,12 +43,15 @@ class registe():
             if UserPhone and CheckCode and NickName and PassWord:
                 c = Checkcode.objects.filter(UserPhone=UserPhone, CheckCode=CheckCode).order_by('-CheckCodeId').first()
                 t = datetime.datetime.now() - datetime.timedelta(minutes=3)
+                print(1)
                 if c:
                     c.SendTime = c.SendTime.replace(tzinfo=None)
                     if t > c.SendTime:
                         msg = '验证码已过期'
                         state = 0
+                        print(2)
                     else:
+                        print(4)
                         u = User()
                         u.UserPhone = UserPhone
                         u.PassWord = encrypt(PassWord.encode('utf8'))
@@ -62,6 +65,7 @@ class registe():
                         u.save()
                         msg = '注册成功'
                         state = 1
+                        print(2)
                 else:
                     msg = '验证码不正确'
                     state = 0
