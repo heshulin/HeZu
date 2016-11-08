@@ -10,8 +10,8 @@ class Imservice(object):
             user = User.objects.filter(UserPhone=UserPhone).first()
             if user.Token != None:
                 return user.Token
-            app_key = 'y745wfm8440uv'
-            app_secret = '8H4Zs6MenT3Trf'
+            app_key = 'qf3d5gbj31hmh'
+            app_secret = 'PuiCAPLLc01cs'
             api = ApiClient(app_key, app_secret)
             r = api.getToken(userId=user.UserId, name=user.NickName,portraitUri=user.UserPhoto)
             r = str(r)
@@ -19,6 +19,8 @@ class Imservice(object):
             print(r)
             user.Token = r['token']
             user.save()
+            print("存储token成功")
+            print(r['token'])
             return r['token']
         except Exception as e:
             return "失败"
