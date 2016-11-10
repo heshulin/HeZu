@@ -24,6 +24,8 @@ class SendHezu(models.Model):
     Picture = models.CharField(max_length=255)
     Number = models.IntegerField()
     Delete = models.IntegerField()
+    Label1 = models.CharField(max_length=255)
+    Label2 = models.CharField(max_length=255)
 
 
 class Circle(models.Model):

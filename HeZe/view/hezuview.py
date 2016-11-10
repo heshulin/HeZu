@@ -25,7 +25,12 @@ def sendhezu(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 #end
 
@@ -35,13 +40,56 @@ def sendhezu(request):
 def hezuinfors(request):
     try:
         page = request.GET.get('page')
-        h = hezu()
-        result = json.dumps(h.allinfors(page))
-        response = HttpResponse(result, content_type="application/json")
-        response["Access-Control-Allow-Origin"] = "*"
+        if page:
+            h = hezu()
+            result = json.dumps(h.allinfors(page))
+            response = HttpResponse(result, content_type="application/json")
+            response["Access-Control-Allow-Origin"] = "*"
+        else:
+            result = {
+                'msg': '请求异常',
+                'state': 0
+            }
+            response = HttpResponse(result, content_type="application/json")
+            response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
+    return response
+
+
+@csrf_exempt
+def selectinfors(request):
+    try:
+        page = request.GET.get('page')
+        Label1 = request.GET.get('Label1')
+        Label2 = request.GET.get('Label2')
+        Number = request.GET.get('Number')
+        if page:
+            h = hezu()
+            result = json.dumps(h.selectInfors(Label1, Label2, Number, page))
+            response = HttpResponse(result, content_type="application/json")
+            response["Access-Control-Allow-Origin"] = "*"
+        else:
+            result = {
+                'msg': '请求异常',
+                'state': 0
+            }
+            response = HttpResponse(result, content_type="application/json")
+            response["Access-Control-Allow-Origin"] = "*"
+    except Exception as e:
+        print(e)
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 #end
 
@@ -66,6 +114,11 @@ def canclehezu(request):
         response = HttpResponse(result, content_type='application/json')
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 #end

@@ -22,8 +22,12 @@ def login(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        result = ''
-        response = HttpResponse(result)
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 
 
@@ -37,7 +41,12 @@ def logout(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 #end
 
@@ -53,7 +62,12 @@ def sendmessage(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 
 
@@ -70,7 +84,12 @@ def reg(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 #end
 
@@ -87,7 +106,12 @@ def revisepsw(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 
 
@@ -102,7 +126,12 @@ def revisephoto(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 
 
@@ -117,7 +146,12 @@ def resetpsw(request):
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
     return response
 #end
 
