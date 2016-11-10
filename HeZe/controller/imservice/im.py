@@ -7,8 +7,9 @@ from HeZe.models import User, Attention
 class Imservice(object):
     def gettoken(self,UserPhone):
         try:
+            print(1)
             user = User.objects.filter(UserPhone=UserPhone).first()
-            if user.Token != None:
+            if user.Token != "":
                 return user.Token
             app_key = 'qf3d5gbj31hmh'
             app_secret = 'PuiCAPLLc01cs'

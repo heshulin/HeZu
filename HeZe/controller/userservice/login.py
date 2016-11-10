@@ -21,6 +21,8 @@ def dologin(UserPhone, PassWord):
                 u.SecretKey = SecretKey
                 u.save()
                 state = 1
+                print("token")
+                print(token)
                 msg = '登陆成功'
         else:
             state = 0
