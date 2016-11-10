@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from HeZe.view.userviews import login, sendmessage, reg, logout, revisepsw, revisephoto, resetpsw
-from HeZe.view.hezuview import hezuinfors, sendhezu
+from HeZe.view.hezuview import hezuinfors, sendhezu, selectinfors
 from HeZe.view.imview import gettoken,getfriends,attention
 from HeZe.view.circleview import sendcircle,circleinfo,circleoneinfo,sendcomment,commentinfo
 
@@ -39,4 +39,5 @@ urlpatterns = [
     url('circleoneinfo', circleoneinfo),
     url('sendcomment', sendcomment),
     url('commentinfo', commentinfo),
+    url('selecthezuinfors', selectinfors),
 ]

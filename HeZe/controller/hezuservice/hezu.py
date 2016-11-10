@@ -111,6 +111,7 @@ class hezu():
 
     def selectInfors(self, Label1, Label2, Number, page):
         try:
+            page = int(page)
             if Label1:
                 lab1_arr = Label1.split('+')
                 s1 = SendHezu.objects.filter(Label1__in=lab1_arr).order_by('-SendHezuId').all()
@@ -136,7 +137,7 @@ class hezu():
             else:
                 if Label2:
                     lab2_arr = Label2.split('+')
-                    s2 = SendHezu.filter(Label2__in=lab2_arr).order_by('-SendHezuId').all()
+                    s2 = SendHezu.objects.filter(Label2__in=lab2_arr).order_by('-SendHezuId').all()
                     hezudata = s2
                     if Number:
                         num_arr = Number.split('+')
@@ -147,10 +148,11 @@ class hezu():
                 else:
                     if Number:
                         num_arr = Number.split('+')
-                        s3 = SendHezu.filter(Number__in=num_arr).order_by('-SendHezuId').all()
+                        s3 = SendHezu.objects.filter(Number__in=num_arr).order_by('-SendHezuId').all()
                         hezudata = s3
                     else:
                         hezudata = None
+            print('1')
             try:
                 hezudata = Paginator(hezudata, 20).page(page)
                 msg = '成功'
