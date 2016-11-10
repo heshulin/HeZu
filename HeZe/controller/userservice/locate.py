@@ -1,12 +1,11 @@
-from HeZe.controller.userservice.islog import islog
+from HeZe.models import User
 
 
 def doLocate(Adress, UserPhone, SecretKey):
     try:
-        state, user = islog(UserPhone, SecretKey)
-        if state == 1:
-            u = user
-            u.Adress = Adress
+        u = User.objects.filter(UserPhone=UserPhone, SecretKey=SecretKey).first()
+        if u:
+            u.Address = Adress
             u.save()
             msg = '定位成功'
             state = 1
