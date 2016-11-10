@@ -14,19 +14,21 @@ class upimage(object):
     def upuserphoto(self, file, Space):
         try:
             img = Image.open(file)
-            type = img.format()
+            type = 'jpg'
+            print(type)
             if file and self.allowed_file(type):
                 # 图片名字
                 #img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
                 filename = getuserphotorandom() + '.png'
-                path = 'C:/images' + filename
+                path = 'C:/images/' + filename
+                print(path)
                 img.save(path, "png")  # 保存图片
                 url = up(path, Space)
                 state = 1
                 msg = '上传成功'
             else:
                 msg = "请合法上传！"
-                state = '0'
+                state = 0
                 url = ''
         except Exception as e:
             state = 0

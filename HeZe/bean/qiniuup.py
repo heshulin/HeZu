@@ -15,10 +15,6 @@ def up(imagelocation,bucketname):
     assert ret['key'] == key
     assert ret['hash'] == etag(localfile)
     print(key)
-    if bucketname == "loveu":
-        return "http://7xrqhs.com1.z0.glb.clouddn.com/" + key + "?imageView2/0/w/96/h/96/format/png/interlace/1/"
-    if bucketname == "paimai":
-        return "http://7xrrdm.com1.z0.glb.clouddn.com/" + key + "?imageView2/0/w/96/h/96/format/png/interlace/1/"
-    if bucketname == "give":
-        return "http://7xrxgm.com1.z0.glb.clouddn.com/" + key + "?imageView2/0/w/96/h/96/format/png/interlace/1/"
+    if bucketname == "hezu":
+        return "http://ogaw9rqk7.bkt.clouddn.com/" + key + "?imageView2/0/w/200/h/200/format/png/interlace/1/"
 

@@ -9,11 +9,11 @@ import json
 @csrf_exempt
 def sendhezu(request):
     try:
-        UserPhone = request.GET.get('UserPhone')
-        SecretKey = request.GET.get('SecretKey')
-        Information = request.GET.get('Information')
-        Address = request.GET.get('Address')
-        Number = request.GET.get('Number')
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        Information = request.POST.get('Information')
+        Address = request.POST.get('Address')
+        Number = request.POST.get('Number')
         Picture = request.FILES['Picture']
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
@@ -34,8 +34,9 @@ def sendhezu(request):
 @csrf_exempt
 def hezuinfors(request):
     try:
+        page = request.GET.get('page')
         h = hezu()
-        result = json.dumps(h.allinfors())
+        result = json.dumps(h.allinfors(page))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
     except Exception as e:
@@ -49,9 +50,9 @@ def hezuinfors(request):
 @csrf_exempt
 def canclehezu(request):
     try:
-        UserPhone = request.GET.get('UserPhone')
-        SecretKey = request.GET.get('SecretKey')
-        SendHezuId = request.GET.get('SendHezuId')
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        SendHezuId = request.POST.get('SendHezuId')
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
             h = hezu()

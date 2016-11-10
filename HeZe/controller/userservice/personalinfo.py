@@ -11,6 +11,7 @@ def getpersonalinfo(UserId):
     Label1 = ""
     Label2 = ""
     Label3 = ""
+    UserPhotoEx = ""
     try:
         u = User.objects.get(UserId=UserId)
         if u:
@@ -21,6 +22,7 @@ def getpersonalinfo(UserId):
             Label1 = u.Label1
             Label2 = u.Label2
             Label3 = u.Label3
+            UserPhotoEx = UserPhoto.replace('?imageView2/0/w/96/h/96/format/png/interlace/1/', '')
             msg = '成功'
             state = 1
         else:
@@ -32,12 +34,13 @@ def getpersonalinfo(UserId):
         msg = '服务器异常'
     array = {
         'UserPhoto': UserPhoto,
-        'NickName':NickName,
-        'Address':Address,
-        'UserPhone':UserPhone,
-        'Label1':Label1,
-        'Label2':Label2,
-        'Label3':Label3,
+        'UserPhotoEx': UserPhotoEx,
+        'NickName': NickName,
+        'Address': Address,
+        'UserPhone': UserPhone,
+        'Label1': Label1,
+        'Label2': Label2,
+        'Label3': Label3,
         'msg': msg,
         'state': state
     }

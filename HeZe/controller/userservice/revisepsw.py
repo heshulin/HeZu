@@ -3,7 +3,7 @@ import datetime
 from HeZe.bean.md5 import encrypt
 
 
-def revisepsw(UserPhone, OldPassWord, NewPassWord):
+def Revisepsw(UserPhone, OldPassWord, NewPassWord):
     try:
         u = User.objects.get(UserPhone=UserPhone, PassWord=OldPassWord)
         if u:

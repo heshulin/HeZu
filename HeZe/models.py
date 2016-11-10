@@ -15,6 +15,7 @@ class User(models.Model):
     SecretKey = models.CharField(max_length=255)
     Token = models.CharField(max_length=255)
 
+
 class SendHezu(models.Model):
     SendHezuId = models.IntegerField(primary_key=True)
     UserId = models.IntegerField()
@@ -27,7 +28,7 @@ class SendHezu(models.Model):
 
 class Circle(models.Model):
     CircleId = models.IntegerField(primary_key=True)
-    UserId = models.IntegerField(max_length=11)
+    UserId = models.IntegerField()
     Information = models.CharField(max_length=255)
     Picture = models.CharField(max_length=255)
 
@@ -50,8 +51,9 @@ class Checkcode(models.Model):
     CheckCode = models.CharField(max_length=255)
     SendTime = models.DateTimeField()
 
+
 class Attention(models.Model):
     AttentionId = models.IntegerField(primary_key=True)
-    UserId = models.IntegerField(max_length=11)
-    BefocusonId = models.IntegerField(max_length=11)
+    UserId = models.IntegerField()
+    BefocusonId = models.IntegerField()
 
