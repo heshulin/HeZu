@@ -26,6 +26,7 @@ class SendHezu(models.Model):
     Delete = models.IntegerField()
     Label1 = models.CharField(max_length=255)
     Label2 = models.CharField(max_length=255)
+    Distance = models.IntegerField()
 
 
 class Circle(models.Model):

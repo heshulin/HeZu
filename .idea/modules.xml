@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HeZu.iml" filepath="$PROJECT_DIR$/.idea/HeZu.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../LoveU/.idea/LoveU.iml" filepath="$PROJECT_DIR$/../LoveU/.idea/LoveU.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../图书管理系统/.idea/图书管理系统.iml" filepath="$PROJECT_DIR$/../图书管理系统/.idea/图书管理系统.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyApp/.idea/MyApp.iml" filepath="$PROJECT_DIR$/../MyApp/.idea/MyApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../untitled10/.idea/untitled10.iml" filepath="$PROJECT_DIR$/../untitled10/.idea/untitled10.iml" />
     </modules>
   </component>
 </project>

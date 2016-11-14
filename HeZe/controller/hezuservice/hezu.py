@@ -2,6 +2,7 @@ from HeZe.models import SendHezu
 from HeZe.bean.upimage import upimage
 from HeZe.controller.userservice.personalinfo import getpersonalinfo
 from django.core.paginator import Paginator, EmptyPage
+from HeZe.bean.lbs_amap import get_distance
 
 class hezu():
 
@@ -39,8 +40,13 @@ class hezu():
 
     def allinfors(self, page):
         try:
+            res = SendHezu.objects.filter(Delete=0).order_by('-SendHezuId').all()
+            for i in res:
+                state, distance = get_distance('111.688844,40.814395', i.Address)
+                i.Distance = distance
+                i.save_base()
             page = int(page)
-            s1 = SendHezu.objects.filter().order_by('-SendHezuId').all()
+            s1 = res.order_by('Distance')
             s = Paginator(s1, 20).page(page)
             msg = '成功'
             state = 1
@@ -50,6 +56,7 @@ class hezu():
                 for i in s:
                     res = getpersonalinfo(i.UserId)
                     arr = {
+                        'SendHezuId': i.SendHezuId,
                         'UserId': i.UserId,
                         'Information': i.Information,
                         'Address': i.Address,
@@ -69,6 +76,12 @@ class hezu():
                 num = 0
         except EmptyPage:
             msg = '这是我的底线'
+            state = 0
+            hezudata = None
+            num = 0
+        except Exception as e:
+            print(e)
+            msg = '服务器错误'
             state = 0
             hezudata = None
             num = 0

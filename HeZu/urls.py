@@ -19,6 +19,7 @@ from HeZe.view.userviews import login, sendmessage, reg, logout, revisepsw, revi
 from HeZe.view.hezuview import hezuinfors, sendhezu, selectinfors
 from HeZe.view.imview import gettoken,getfriends,attention
 from HeZe.view.circleview import sendcircle, circleinfo, circleoneinfo, sendcomment, commentinfo
+from HeZe.view.testview import f
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -41,4 +42,5 @@ urlpatterns = [
     url('commentinfo', commentinfo),
     url('selecthezuinfors', selectinfors),
     url('locate', locate),
+    url('test', f),
 ]
