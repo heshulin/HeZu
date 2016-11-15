@@ -42,7 +42,7 @@ class hezu():
         try:
             res = SendHezu.objects.filter(Delete=0).order_by('-SendHezuId').all()
             for i in res:
-                state, distance = get_distance('111.688844,40.814395', i.Address)
+                state, distance = get_distance('111.688844,40.814395', i.Lon_Lat)
                 i.Distance = distance
                 i.save_base()
             page = int(page)

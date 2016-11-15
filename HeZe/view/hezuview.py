@@ -52,6 +52,7 @@ def hezuinfors(request):
             }
             response = HttpResponse(result, content_type="application/json")
             response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -60,7 +61,7 @@ def hezuinfors(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 
 
 @csrf_exempt
@@ -82,6 +83,7 @@ def selectinfors(request):
             }
             response = HttpResponse(result, content_type="application/json")
             response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -90,7 +92,7 @@ def selectinfors(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
 
 
@@ -112,6 +114,7 @@ def canclehezu(request):
             }
         result = json.dumps(array)
         response = HttpResponse(result, content_type='application/json')
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -120,5 +123,5 @@ def canclehezu(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
