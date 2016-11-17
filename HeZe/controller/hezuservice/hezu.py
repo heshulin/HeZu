@@ -97,7 +97,7 @@ class hezu():
         except Exception as e:
             print(e)
             array = {
-                'msg': '服务异常',
+                'msg': '服务器异常',
                 'state': 0
             }
             return array

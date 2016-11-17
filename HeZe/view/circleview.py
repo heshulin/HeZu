@@ -20,7 +20,7 @@ def sendcircle(request):
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
             C = circle()
-            result = json.dumps(C.sendcircle(user.UserId, Information, Title, Picture))
+            result = json.dumps(C.sendcircle(user.UserId, Information, Title, Picture, num))
         else:
             result = json.dumps({'state': 0, 'msg': '请登录'})
         response = HttpResponse(result, content_type="application/json")
@@ -46,10 +46,17 @@ def circleinfo(request):
         result = json.dumps(C.getinfo())
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
-    return response
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        result = json.dumps(result)
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
 #end
 
 

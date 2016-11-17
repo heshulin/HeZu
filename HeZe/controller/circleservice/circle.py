@@ -3,7 +3,7 @@ from HeZe.bean.upimage import upimage
 import datetime
 
 class circle():
-    def sendcircle(self, UserId, Information,Title, Picture):
+    def sendcircle(self, UserId, Information,Title, Picture, num):
         try:
             if UserId and Information:
                 uu = upimage()
@@ -11,13 +11,13 @@ class circle():
                 s.Title = Title
                 s.UserId = UserId
                 s.Information = Information
-
-                s.time = str(datetime.datetime.now())
+                s.SendTime = str(datetime.datetime.now())
                 picture_path = ''
-                for i in Picture:
-                    arr1 = uu.upuserphoto(i, 'hezu')
-                    if arr1['state']:
-                        picture_path = picture_path + arr1['url'] + '+'
+                if int(num) > 0:
+                    for i in Picture:
+                        arr1 = uu.upuserphoto(i, 'hezu')
+                        if arr1['state']:
+                            picture_path = picture_path + arr1['url'] + '+'
                 s.Picture = picture_path
                 s.save()
                 state = 1
@@ -51,10 +51,10 @@ class circle():
                 u = User.objects.filter(UserId=i.UserId).first()
                 arr = {
                     'UserId': i.UserId,
-                    'CircleId':i.CircleId,
-                    'NickName':u.NickName,
-                    'UserPhoto':u.UserPhoto,
-                    'Label1':u.Label1,
+                    'CircleId': i.CircleId,
+                    'NickName': u.NickName,
+                    'UserPhoto': u.UserPhoto,
+                    'Label1': u.Label1,
                     'Label2': u.Label2,
                     'Label3': u.Label3,
                     'Information': i.Information,

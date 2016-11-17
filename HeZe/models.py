@@ -38,7 +38,7 @@ class Circle(models.Model):
     Information = models.CharField(max_length=255)
     Title = models.CharField(max_length=255)
     SendTime = models.CharField(max_length=255)
-    Picture = models.CharField(max_length=255)
+    Picture = models.CharField(max_length=500)
 
 class CircleComment(models.Model):
     CommentId = models.IntegerField(primary_key=True)
