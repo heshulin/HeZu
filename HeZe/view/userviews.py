@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from HeZe.controller.userservice.revisepsw import Revisepsw, Resetpsw
 from HeZe.controller.userservice.logout import logout
 from HeZe.controller.userservice.revisephoto import revisePhoto
-from HeZe.controller.userservice.locate import doLocate, get_hint
+from HeZe.controller.userservice.locate import doLocate, getHint
 from HeZe.controller.userservice.islog import islog
 from HeZe.controller.userservice.personalinfo import getpersonalinfo
 import json
@@ -30,6 +30,7 @@ def login(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -50,6 +51,7 @@ def logout(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -72,6 +74,7 @@ def sendmessage(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -95,6 +98,7 @@ def reg(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -118,6 +122,7 @@ def revisepsw(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -139,6 +144,7 @@ def revisephoto(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -160,6 +166,7 @@ def resetpsw(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -186,6 +193,7 @@ def resetpsw(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -210,6 +218,7 @@ def locate(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -223,7 +232,7 @@ def gethint(request):
         SecretKey = request.POST.get('SecretKey')
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
-            result = get_hint(keywords)
+            result = json.dumps(getHint(keywords))
             response = HttpResponse(result, content_type="application/json")
             response["Access-Control-Allow-Origin"] = "*"
         else:
@@ -231,6 +240,7 @@ def gethint(request):
                 'msg': '请登录',
                 'state': 0
             }
+            result = json.dumps(result)
             response = HttpResponse(result, content_type="application/json")
             response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -240,6 +250,7 @@ def gethint(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response

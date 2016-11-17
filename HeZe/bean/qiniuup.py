@@ -11,10 +11,8 @@ def up(imagelocation,bucketname):
     token = q.upload_token(bucket_name, key)
     localfile = imagelocation
     ret, info = put_file(token, key, localfile)
-    print(info)
     assert ret['key'] == key
     assert ret['hash'] == etag(localfile)
-    print(key)
     if bucketname == "hezu":
         return "http://ogaw9rqk7.bkt.clouddn.com/" + key + "?imageView2/0/w/200/h/200/format/png/interlace/1/"
 

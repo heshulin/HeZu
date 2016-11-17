@@ -1,10 +1,9 @@
 from HeZe.models import Circle,User,CircleComment
 from HeZe.bean.upimage import upimage
-import time
+import datetime
 
 class circle():
-    def sendcircle(self, UserId, Information,Title, Picture1, Picture2, Picture3, Picture4, Picture5, Picture6,
-                   Picture7, Picture8, Picture9):
+    def sendcircle(self, UserId, Information,Title, Picture):
         try:
             if UserId and Information:
                 uu = upimage()
@@ -12,95 +11,34 @@ class circle():
                 s.Title = Title
                 s.UserId = UserId
                 s.Information = Information
-                ISOTIMEFORMAT = '%Y-%m-%d %X'
-                s.time = time.strftime(ISOTIMEFORMAT, time.localtime())
-                if Picture1:
-                    arr1 = uu.upuserphoto(Picture1, 'hezu')
+
+                s.time = str(datetime.datetime.now())
+                picture_path = ''
+                for i in Picture:
+                    arr1 = uu.upuserphoto(i, 'hezu')
                     if arr1['state']:
-                        s.Picture1 = arr1['url']
-                else:
-                    s.Picture1 = ""
-                if Picture2:
-                    arr2 = uu.upuserphoto(Picture2, 'hezu')
-                    if arr2['state']:
-                        s.Picture2 = arr2['url']
-
-                else:
-                    s.Picture2 = ""
-
-                if Picture3:
-                    arr2 = uu.upuserphoto(Picture3, 'hezu')
-                    if arr2['state']:
-                        s.Picture3 = arr2['url']
-
-                else:
-                    s.Picture3 = ""
-
-                if Picture4:
-                    arr2 = uu.upuserphoto(Picture4, 'hezu')
-                    if arr2['state']:
-                        s.Picture4 = arr2['url']
-
-                else:
-                    s.Picture4 = ""
-
-                if Picture5:
-                    arr2 = uu.upuserphoto(Picture5, 'hezu')
-                    if arr2['state']:
-                        s.Picture5 = arr2['url']
-
-                else:
-                    s.Picture5 = ""
-
-                if Picture6:
-                    arr2 = uu.upuserphoto(Picture6, 'hezu')
-                    if arr2['state']:
-                        s.Picture6 = arr2['url']
-
-                else:
-                    s.Picture6 = ""
-
-                if Picture7:
-                    arr2 = uu.upuserphoto(Picture7, 'hezu')
-                    if arr2['state']:
-                        s.Picture7 = arr2['url']
-
-                else:
-                    s.Picture7 = ""
-
-                if Picture8:
-                    arr2 = uu.upuserphoto(Picture8, 'hezu')
-                    if arr2['state']:
-                        s.Picture8 = arr2['url']
-
-                else:
-                    s.Picture8 = ""
-
-                if Picture9:
-                    arr2 = uu.upuserphoto(Picture9, 'hezu')
-                    if arr2['state']:
-                        s.Picture9 = arr2['url']
-
-                else:
-                    s.Picture9 = ""
-
+                        picture_path = picture_path + arr1['url'] + '+'
+                s.Picture = picture_path
+                s.save()
                 state = 1
                 msg = '成功'
-                s.save()
-
-
             else:
                 state = 0
                 msg = '信息不能为空'
+            array = {
+                'msg': msg,
+                'state': state
+            }
+            return array
         except Exception as e:
             print(e)
             state = 0
             msg = '失败'
-        array = {
-            'msg': msg,
-            'state': state
-        }
-        return array
+            array = {
+                'msg': msg,
+                'state': state
+            }
+            return array
 
     def getinfo(self):
         try:
@@ -120,15 +58,6 @@ class circle():
                     'Label2': u.Label2,
                     'Label3': u.Label3,
                     'Information': i.Information,
-                    'Picture1': i.Picture1,
-                    'Picture2': i.Picture2,
-                    'Picture3': i.Picture3,
-                    'Picture4': i.Picture4,
-                    'Picture5': i.Picture5,
-                    'Picture6': i.Picture6,
-                    'Picture7': i.Picture7,
-                    'Picture8': i.Picture8,
-                    'Picture9': i.Picture9,
                 }
                 circledata.append(arr)
         except Exception as e:

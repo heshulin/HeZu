@@ -20,7 +20,6 @@ class upimage(object):
                 #img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
                 filename = getuserphotorandom() + '.png'
                 path = 'C:/images/' + filename
-                print(path)
                 img.save(path, "png")  # 保存图片
                 url = up(path, Space)
                 state = 1

@@ -31,24 +31,38 @@ def doLocate(Lon_Lat, Address, UserPhone, SecretKey):
 
 def getHint(keywords):
     try:
-        res = get_hint(keywords)
-        if res['status'] == '1':
-            msg = '成功'
-            state = 1
-            tips = res['tips']
-            num = res['count']
+        if keywords:
+            res = get_hint(keywords)
+            if res['status'] == '1':
+                msg = '成功'
+                state = 1
+                tips = []
+                del res['tips'][0]
+                for i in res['tips']:
+                    arr = {
+                        'address': i['address'],
+                        'location': i['location']
+                    }
+                    tips.append(arr)
+                num = res['count']
+            else:
+                msg = '没有找到相关结果'
+                state = 0
+                tips = None
+                num = 0
+            array = {
+                'msg': msg,
+                'state': state,
+                'tips': tips,
+                'num': num
+            }
+            return array
         else:
-            msg = '没有找到相关结果'
-            state = 0
-            tips = None
-            num = 0
-        array = {
-            'msg': msg,
-            'state': state,
-            'tips': tips,
-            'num': num
-        }
-        return array
+            array = {
+                'msg': '没有相关提示',
+                'state': 1,
+            }
+            return array
     except Exception as e:
         array = {
             'msg': '服务器错误',

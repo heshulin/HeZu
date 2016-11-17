@@ -1,8 +1,8 @@
-from django.test import TestCase
-from PIL import Image
+import os
 # Create your tests here.
-image = Image.open('C:\images\c70b0191c65e5c8e029bbbcee980adca.png')
-print(image.size())
+image = open('C:\images\c70b0191c65e5c8e029bbbcee980adca.png')
+print(os.path.split(image.name))
+print
 
 
 

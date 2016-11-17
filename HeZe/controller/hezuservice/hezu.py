@@ -19,7 +19,7 @@ class hezu():
                     s.Information = Information
                     s.Address =Address
                     s.Number = int(Number)
-                    s.SendTime = datetime.datetime.now()
+                    s.SendTime = str(datetime.datetime.now())
                     s.Delete = 0
                     s.Picture = arr['url']
                     s.save()

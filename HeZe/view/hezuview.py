@@ -30,6 +30,7 @@ def sendhezu(request):
             'msg': '服务器错误',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -60,6 +61,7 @@ def hezuinfors(request):
             'msg': '服务器错误',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -91,6 +93,7 @@ def selectinfors(request):
             'msg': '请求异常',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -122,6 +125,7 @@ def canclehezu(request):
             'msg': '服务器错误',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -142,6 +146,7 @@ def get_thishezu(request):
             'msg': '服务器错误',
             'state': 0
         }
+        result = json.dumps(result)
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response

@@ -9,34 +9,33 @@ import json
 @csrf_exempt
 def sendcircle(request):
     try:
-        UserPhone = request.GET.get('UserPhone')
-        SecretKey = request.GET.get('SecretKey')
-        Information = request.GET.get('Information')
-        Title = request.GET.get('Information')
-        Picture1 = request.FILES['Picture']
-        Picture2 = request.FILES['Picture']
-        Picture3 = request.FILES['Picture']
-        Picture4 = request.FILES['Picture']
-        Picture5 = request.FILES['Picture']
-        Picture6 = request.FILES['Picture']
-        Picture7 = request.FILES['Picture']
-        Picture8 = request.FILES['Picture']
-        Picture9 = request.FILES['Picture']
-
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        Information = request.POST.get('Information')
+        Title = request.POST.get('Title')
+        num = request.POST.get('num')
+        Picture = []
+        for i in range(1, int(num)+1):
+            Picture.append(request.FILES['Picture'+str(i)])
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
             C = circle()
-            result = json.dumps(C.sendcircle(UserId=user.UserId,Information=Information,Title=Title,Picture1=Picture1,
-                                             Picture2=Picture2,Picture3=Picture3,Picture4=Picture5,Picture6=Picture6,
-                                             Picture7=Picture7,Picture8=Picture8,Picture9=Picture9))
+            result = json.dumps(C.sendcircle(user.UserId, Information, Title, Picture))
         else:
             result = json.dumps({'state': 0, 'msg': '请登录'})
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
-        response = HttpResponse('服务器异常')
-    return response
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        result = json.dumps(result)
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
 #end
 
 #朋友圈首页信息
