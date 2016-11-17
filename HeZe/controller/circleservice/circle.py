@@ -54,6 +54,8 @@ class circle():
                     'CircleId': i.CircleId,
                     'NickName': u.NickName,
                     'UserPhoto': u.UserPhoto,
+                    'SendTime':i.SendTime,
+                    'Picture':i.Picture.split('+'),
                     'Label1': u.Label1,
                     'Label2': u.Label2,
                     'Label3': u.Label3,
@@ -107,7 +109,8 @@ class circle():
                 'Label2': u.Label2,
                 'Label3': u.Label3,
                 'Information': c.Information,
-                'Picture':c.Picture
+                'SendTime':c.SendTime,
+                'Picture':c.Picture.split('+'),
             }
             state = 1
             msg = "成功"
@@ -116,7 +119,6 @@ class circle():
             data = []
             msg = '服务器错误'
             state = 0
-
         array = {
             'data':data,
             'msg': msg,
