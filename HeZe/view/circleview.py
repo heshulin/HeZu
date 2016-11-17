@@ -12,11 +12,23 @@ def sendcircle(request):
         UserPhone = request.GET.get('UserPhone')
         SecretKey = request.GET.get('SecretKey')
         Information = request.GET.get('Information')
-        Picture = request.FILES['Picture']
+        Title = request.GET.get('Information')
+        Picture1 = request.FILES['Picture']
+        Picture2 = request.FILES['Picture']
+        Picture3 = request.FILES['Picture']
+        Picture4 = request.FILES['Picture']
+        Picture5 = request.FILES['Picture']
+        Picture6 = request.FILES['Picture']
+        Picture7 = request.FILES['Picture']
+        Picture8 = request.FILES['Picture']
+        Picture9 = request.FILES['Picture']
+
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
             C = circle()
-            result = json.dumps(C.sendcircle(UserId=user.UserId,Information=Information,Picture=Picture))
+            result = json.dumps(C.sendcircle(UserId=user.UserId,Information=Information,Title=Title,Picture1=Picture1,
+                                             Picture2=Picture2,Picture3=Picture3,Picture4=Picture5,Picture6=Picture6,
+                                             Picture7=Picture7,Picture8=Picture8,Picture9=Picture9))
         else:
             result = json.dumps({'state': 0, 'msg': '请登录'})
         response = HttpResponse(result, content_type="application/json")

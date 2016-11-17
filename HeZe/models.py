@@ -35,8 +35,17 @@ class Circle(models.Model):
     CircleId = models.IntegerField(primary_key=True)
     UserId = models.IntegerField()
     Information = models.CharField(max_length=255)
-    Picture = models.CharField(max_length=255)
-
+    title = models.CharField(max_length=255)
+    time = models.CharField(max_length=255)
+    Picture1 = models.CharField(max_length=255)
+    Picture2 = models.CharField(max_length=255)
+    Picture3 = models.CharField(max_length=255)
+    Picture4 = models.CharField(max_length=255)
+    Picture5 = models.CharField(max_length=255)
+    Picture6 = models.CharField(max_length=255)
+    Picture7 = models.CharField(max_length=255)
+    Picture8 = models.CharField(max_length=255)
+    Picture9 = models.CharField(max_length=255)
 
 class CircleComment(models.Model):
     CommentId = models.IntegerField(primary_key=True)
