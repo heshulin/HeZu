@@ -11,21 +11,17 @@ class Message(object):
     m.update(PassWord)
     PassWord = m.hexdigest()
     def sendMessage(self, phone):
-        try:
-            len = 6
-            CheckCode = rand(len)
-            content = "【合租】，您的验证码为" + CheckCode + "在3分钟内有效，请勿泄露验证码给他人"
-            url = "http://www.smsbao.com/sms?u=" + str(self.UserName)
-            url = url + "&p=" + self.PassWord
-            url = url + "&m="
-            url = url + str(phone)
-            url = url + "&c=" + content
-            conn = httplib2.Http()
-            resp, content = conn.request(url, "GET")
-            print(CheckCode)
-            return CheckCode
-        except Exception as e:
-            print(e)
+        len = 6
+        CheckCode = rand(len)
+        content = "【合租】，您的验证码为" + CheckCode + "在3分钟内有效，请勿泄露验证码给他人"
+        url = "http://www.smsbao.com/sms?u=" + str(self.UserName)
+        url = url + "&p=" + self.PassWord
+        url = url + "&m="
+        url = url + str(phone)
+        url = url + "&c=" + content
+        conn = httplib2.Http()
+        resp, content = conn.request(url, "GET")
+        return CheckCode
 
 
 

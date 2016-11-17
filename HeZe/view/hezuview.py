@@ -23,15 +23,16 @@ def sendhezu(request):
             result = json.dumps({'state': 0, 'msg': '请登录'})
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
-            'msg': '请求异常',
+            'msg': '服务器错误',
             'state': 0
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
 
 
@@ -56,7 +57,7 @@ def hezuinfors(request):
     except Exception as e:
         print(e)
         result = {
-            'msg': '请求异常',
+            'msg': '服务器错误',
             'state': 0
         }
         response = HttpResponse(result, content_type="application/json")
@@ -78,7 +79,7 @@ def selectinfors(request):
             response["Access-Control-Allow-Origin"] = "*"
         else:
             result = {
-                'msg': '请求异常',
+                'msg': '服务器错误',
                 'state': 0
             }
             response = HttpResponse(result, content_type="application/json")
@@ -118,10 +119,30 @@ def canclehezu(request):
     except Exception as e:
         print(e)
         result = {
-            'msg': '请求异常',
+            'msg': '服务器错误',
             'state': 0
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
 #end
+
+
+@csrf_exempt
+def get_thishezu(request):
+    try:
+        SendHezuId = request.GET.get('SendHezuId')
+        h = hezu()
+        result = json.dumps(h.thishezu(SendHezuId))
+        response = HttpResponse(result, content_type='application/json')
+        return response
+    except Exception as e:
+        print(e)
+        result = {
+            'msg': '服务器错误',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+

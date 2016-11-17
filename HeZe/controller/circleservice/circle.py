@@ -120,7 +120,15 @@ class circle():
                     'Label2': u.Label2,
                     'Label3': u.Label3,
                     'Information': i.Information,
-                    'Picture': i.Picture,
+                    'Picture1': i.Picture1,
+                    'Picture2': i.Picture2,
+                    'Picture3': i.Picture3,
+                    'Picture4': i.Picture4,
+                    'Picture5': i.Picture5,
+                    'Picture6': i.Picture6,
+                    'Picture7': i.Picture7,
+                    'Picture8': i.Picture8,
+                    'Picture9': i.Picture9,
                 }
                 circledata.append(arr)
         except Exception as e:

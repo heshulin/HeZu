@@ -3,6 +3,8 @@ from HeZe.bean.upimage import upimage
 from HeZe.controller.userservice.personalinfo import getpersonalinfo
 from django.core.paginator import Paginator, EmptyPage
 from HeZe.bean.lbs_amap import get_distance
+from django.forms.models import model_to_dict
+import datetime
 
 class hezu():
 
@@ -17,6 +19,7 @@ class hezu():
                     s.Information = Information
                     s.Address =Address
                     s.Number = int(Number)
+                    s.SendTime = datetime.datetime.now()
                     s.Delete = 0
                     s.Picture = arr['url']
                     s.save()
@@ -28,15 +31,18 @@ class hezu():
             else:
                 state = 0
                 msg = '信息不能为空'
+            array = {
+                'msg': msg,
+                'state': state
+            }
+            return array
         except Exception as e:
             print(e)
-            state = 0
-            msg = '失败'
-        array = {
-            'msg': msg,
-            'state': state
-        }
-        return  array
+            array = {
+                'msg': '服务器错误',
+                'state': 0
+            }
+            return  array
 
     def allinfors(self, page):
         try:
@@ -61,6 +67,7 @@ class hezu():
                         'Information': i.Information,
                         'Address': i.Address,
                         'Picture': i.Picture,
+                        'SendTime': i.SendTime,
                         'PictureEx': i.Picture.replace('?imageView2/0/w/200/h/200/format/png/interlace/1/', ''),
                         'Number': i.Number,
                         'UserPhoto': res['UserPhoto'],
@@ -74,24 +81,26 @@ class hezu():
             else:
                 hezudata = None
                 num = 0
+            array = {
+                'state': state,
+                'msg': msg,
+                'hezudata': hezudata,
+                'num': num
+            }
+            return array
         except EmptyPage:
-            msg = '这是我的底线'
-            state = 0
-            hezudata = None
-            num = 0
+            array = {
+                'msg': '这是我的底线',
+                'state': 0
+            }
+            return array
         except Exception as e:
             print(e)
-            msg = '服务器错误'
-            state = 0
-            hezudata = None
-            num = 0
-        array = {
-            'msg': msg,
-            'state': state,
-            'hezudata': hezudata,
-            'num': num
-        }
-        return array
+            array = {
+                'msg': '服务异常',
+                'state': 0
+            }
+            return array
 
     def canclehezu(self, UserId, SendHeZuId):
         try:
@@ -112,15 +121,20 @@ class hezu():
             else:
                 state = 0
                 msg = '请登录'
+            array = {
+                'state': state,
+                'msg': msg
+            }
+            return array
         except Exception as e:
             print(e)
             state = 0
             msg = '服务器错误'
-        array = {
-            'state': state,
-            'msg': msg
-        }
-        return array
+            array = {
+                'state': state,
+                'msg': msg
+            }
+            return array
 
     def selectInfors(self, Label1, Label2, Number, page):
         try:
@@ -165,8 +179,6 @@ class hezu():
                         hezudata = s3
                     else:
                         hezudata = None
-            print('1')
-            try:
                 hezudata = Paginator(hezudata, 20).page(page)
                 msg = '成功'
                 state = 1
@@ -180,6 +192,7 @@ class hezu():
                             'Information': i.Information,
                             'Address': i.Address,
                             'Picture': i.Picture,
+                            'SendTime': i.SendTime,
                             'PictureEx': i.Picture.replace('?imageView2/0/w/200/h/200/format/png/interlace/1/', ''),
                             'Number': i.Number,
                             'UserPhoto': res['UserPhoto'],
@@ -190,24 +203,57 @@ class hezu():
                             'Label3': res['Label3']
                         }
                         data.append(arr)
-            except EmptyPage:
-                data = None
-                msg = '这是我的底线'
-                state = 0
-                num = 0
+                array = {
+                    'hezudata': data,
+                    'msg': msg,
+                    'state': state,
+                    'num': num
+                }
+                return array
+        except EmptyPage:
+            array = {
+                'msg': '这是我的底线',
+                'state': 0
+            }
+            return array
         except Exception as e:
             print(e)
-            msg = '服务器异常'
-            state = 0
-            num = 0
-            data = None
-        array = {
-            'msg': msg,
-            'state': state,
-            'num': num,
-            'hezudata': data
-        }
-        return array
+            array = {
+                'msg': '服务异常',
+                'state': 0
+            }
+            return array
+
+    def thishezu(self, SendHezuId):
+        try:
+            s = SendHezu.objects.get(SendHezuId=SendHezuId)
+            UserId = s.UserId
+            arr = model_to_dict(s)
+            personalinfor = getpersonalinfo(UserId)
+            arr['PictureEx'] = s.Picture.replace('?imageView2/0/w/200/h/200/format/png/interlace/1/', '')
+            arr['UserPhoto'] = personalinfor['UserPhoto']
+            arr['UserPhotoEx'] = personalinfor['UserPhoto']
+            arr['NickName'] = personalinfor['NickName']
+            arr['Label3'] = personalinfor['Label3']
+            array = {
+                'msg': '成功',
+                'state': 1,
+                'hezudata': arr
+            }
+            return array
+        except Exception as e:
+            print(e)
+            array = {
+                'msg': '服务异常',
+                'state': 0
+            }
+            return array
+
+
+
+
+
+
 
 
 

@@ -16,26 +16,22 @@ def get_distance(origins, destination):
         return 0, res['info']
 
 def get_around(lat, lon, r):
-    try:
-        lat = float(lat)
-        lon = float(lon)
-        r = float(r)
-        degree = float((14901 * 1609) / 360.0)
-        dpmlat = 1 / degree
-        radiuslat = dpmlat * r
-        minlat = lat - radiuslat
-        maxlat = lat + radiuslat
+    lat = float(lat)
+    lon = float(lon)
+    r = float(r)
+    degree = float((14901 * 1609) / 360.0)
+    dpmlat = 1 / degree
+    radiuslat = dpmlat * r
+    minlat = lat - radiuslat
+    maxlat = lat + radiuslat
 
-        mpdlon = degree * math.cos(lat * (3.14159265 / 180))
-        dpmlon = 1 / mpdlon
-        radiuslon = dpmlon * r
-        minlon = lon - radiuslon
-        maxlon = lon + radiuslon
+    mpdlon = degree * math.cos(lat * (3.14159265 / 180))
+    dpmlon = 1 / mpdlon
+    radiuslon = dpmlon * r
+    minlon = lon - radiuslon
+    maxlon = lon + radiuslon
 
-        return minlat, maxlat, minlon, maxlon
-    except Exception as e:
-        print(e)
-        return None
+    return minlat, maxlat, minlon, maxlon
 
 def get_hint(keyword):
     conn = httplib2.Http()

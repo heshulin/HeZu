@@ -29,6 +29,7 @@ class SendHezu(models.Model):
     Label2 = models.CharField(max_length=255)
     Distance = models.IntegerField()
     Lon_Lat = models.CharField(max_length=255)
+    SendTime = models.CharField(max_length=255)
 
 
 class Circle(models.Model):

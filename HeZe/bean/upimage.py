@@ -15,7 +15,6 @@ class upimage(object):
         try:
             img = Image.open(file)
             type = 'jpg'
-            print(type)
             if file and self.allowed_file(type):
                 # 图片名字
                 #img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
