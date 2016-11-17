@@ -1,5 +1,5 @@
 from HeZe.models import SendHezu
-from HeZe.bean.distance import get_distance, get_around
+from HeZe.bean.lbs_amap import get_distance, get_around
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 

@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from HeZe.controller.userservice.revisepsw import Revisepsw, Resetpsw
 from HeZe.controller.userservice.logout import logout
 from HeZe.controller.userservice.revisephoto import revisePhoto
-from HeZe.controller.userservice.locate import doLocate
+from HeZe.controller.userservice.locate import doLocate, get_hint
 from HeZe.controller.userservice.islog import islog
 from HeZe.controller.userservice.personalinfo import getpersonalinfo
 import json
@@ -23,6 +23,7 @@ def login(request):
         result = json.dumps(dologin(UserPhone, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -31,7 +32,7 @@ def login(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 
 
 @csrf_exempt
@@ -42,6 +43,7 @@ def logout(request):
         result = json.dumps(logout(UserPhone,SecretKey))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -50,7 +52,7 @@ def logout(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
 
 
@@ -63,6 +65,7 @@ def sendmessage(request):
         result = json.dumps(r.sendmessage(UserPhone))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -71,7 +74,7 @@ def sendmessage(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 
 
 @csrf_exempt
@@ -85,6 +88,7 @@ def reg(request):
         result = json.dumps(r.sendcheckcode(UserPhone, CheckCode, NickName, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -93,7 +97,7 @@ def reg(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
 
 
@@ -107,6 +111,7 @@ def revisepsw(request):
         result = json.dumps(Revisepsw(UserPhone,OldPassWord,NewPassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -115,7 +120,7 @@ def revisepsw(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 
 
 @csrf_exempt
@@ -127,6 +132,7 @@ def revisephoto(request):
         result = json.dumps(revisePhoto(UserPhone, SecretKey, UserPhoto))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -135,7 +141,7 @@ def revisephoto(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 
 
 @csrf_exempt
@@ -147,6 +153,7 @@ def resetpsw(request):
         result = json.dumps(Resetpsw(UserPhone, CheckCode, PassWord))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -155,7 +162,7 @@ def resetpsw(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
 
 
@@ -172,6 +179,7 @@ def resetpsw(request):
             result = json.dumps({'state': 0, 'msg': '请登录'})
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -180,7 +188,7 @@ def resetpsw(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
 #end
 
 
@@ -188,12 +196,14 @@ def resetpsw(request):
 @csrf_exempt
 def locate(request):
     try:
-        Adress = request.POST.get('locate')
+        Lon_Lat = request.POST.get('locate')
+        Address = request.POST.get('Address')
         UserPhone = request.POST.get('UserPhone')
         SecretKey = request.POST.get('SecretKey')
-        result = json.dumps(doLocate(Adress, UserPhone, SecretKey))
+        result = json.dumps(doLocate(Lon_Lat, Address, UserPhone, SecretKey))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
+        return response
     except Exception as e:
         print(e)
         result = {
@@ -202,7 +212,37 @@ def locate(request):
         }
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
-    return response
+        return response
+
+
+@csrf_exempt
+def gethint(request):
+    try:
+        keywords = request.POST.get('keywords')
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        state, user = islog(UserPhone, SecretKey)
+        if state == 1:
+            result = get_hint(keywords)
+            response = HttpResponse(result, content_type="application/json")
+            response["Access-Control-Allow-Origin"] = "*"
+        else:
+            result = {
+                'msg': '请登录',
+                'state': 0
+            }
+            response = HttpResponse(result, content_type="application/json")
+            response["Access-Control-Allow-Origin"] = "*"
+        return response
+    except Exception as e:
+        print(e)
+        result = {
+            'msg': '请求异常',
+            'state': 0
+        }
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
 #end
 
 

@@ -14,6 +14,7 @@ class User(models.Model):
     Label3 = models.CharField(max_length=255)
     SecretKey = models.CharField(max_length=255)
     Token = models.CharField(max_length=255)
+    Lon_Lat = models.CharField(max_length=255)
 
 
 class SendHezu(models.Model):
@@ -27,6 +28,7 @@ class SendHezu(models.Model):
     Label1 = models.CharField(max_length=255)
     Label2 = models.CharField(max_length=255)
     Distance = models.IntegerField()
+    Lon_Lat = models.CharField(max_length=255)
 
 
 class Circle(models.Model):
