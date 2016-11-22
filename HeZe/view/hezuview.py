@@ -42,18 +42,17 @@ def sendhezu(request):
 def hezuinfors(request):
     try:
         page = request.GET.get('page')
+        Location = request.GET.get('Location')
+        if not Location:
+            Location = '111.688844,40.814395'
         if page:
-            h = hezu()
-            result = json.dumps(h.allinfors(page))
-            response = HttpResponse(result, content_type="application/json")
-            response["Access-Control-Allow-Origin"] = "*"
+            page = int(page)
         else:
-            result = {
-                'msg': '请求异常',
-                'state': 0
-            }
-            response = HttpResponse(result, content_type="application/json")
-            response["Access-Control-Allow-Origin"] = "*"
+            page = 1
+        h = hezu()
+        result = json.dumps(h.allinfors(page, Location))
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
         return response
     except Exception as e:
         print(e)
@@ -71,21 +70,20 @@ def hezuinfors(request):
 def selectinfors(request):
     try:
         page = request.GET.get('page')
+        Location = request.GET.get('Location')
         Label1 = request.GET.get('Label1')
         Label2 = request.GET.get('Label2')
         Number = request.GET.get('Number')
+        if not Location:
+            Location = '111.688844,40.814395'
         if page:
-            h = hezu()
-            result = json.dumps(h.selectInfors(Label1, Label2, Number, page))
-            response = HttpResponse(result, content_type="application/json")
-            response["Access-Control-Allow-Origin"] = "*"
+            page = int(page)
         else:
-            result = {
-                'msg': '服务器错误',
-                'state': 0
-            }
-            response = HttpResponse(result, content_type="application/json")
-            response["Access-Control-Allow-Origin"] = "*"
+            page = 1
+        h = hezu()
+        result = json.dumps(h.selectInfors(Label1, Label2, Number, page, Location))
+        response = HttpResponse(result, content_type="application/json")
+        response["Access-Control-Allow-Origin"] = "*"
         return response
     except Exception as e:
         print(e)

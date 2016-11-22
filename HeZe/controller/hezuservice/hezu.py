@@ -44,14 +44,13 @@ class hezu():
             }
             return  array
 
-    def allinfors(self, page):
+    def allinfors(self, page, Location):
         try:
             res = SendHezu.objects.filter(Delete=0).order_by('-SendHezuId').all()
             for i in res:
-                state, distance = get_distance('111.688844,40.814395', i.Lon_Lat)
+                state, distance = get_distance(Location, i.Lon_Lat)
                 i.Distance = distance
                 i.save_base()
-            page = int(page)
             s1 = res.order_by('Distance')
             s = Paginator(s1, 20).page(page)
             msg = '成功'
@@ -136,9 +135,8 @@ class hezu():
             }
             return array
 
-    def selectInfors(self, Label1, Label2, Number, page):
+    def selectInfors(self, Label1, Label2, Number, page, Location):
         try:
-            page = int(page)
             if Label1:
                 lab1_arr = Label1.split('+')
                 s1 = SendHezu.objects.filter(Label1__in=lab1_arr).order_by('-SendHezuId').all()
@@ -179,6 +177,11 @@ class hezu():
                         hezudata = s3
                     else:
                         hezudata = None
+                for i in hezudata:
+                    state, distance = get_distance(Location, i.Lon_Lat)
+                    i.Distance = distance
+                    i.save_base()
+                hezudata = hezudata.order_by('Distance')
                 hezudata = Paginator(hezudata, 20).page(page)
                 msg = '成功'
                 state = 1

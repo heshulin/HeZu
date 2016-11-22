@@ -42,8 +42,13 @@ def sendcircle(request):
 @csrf_exempt
 def circleinfo(request):
     try:
+        page = request.GET.get('page')
+        if page:
+            page = int(page)
+        else:
+            page=1
         C = circle()
-        result = json.dumps(C.getinfo())
+        result = json.dumps(C.getinfo(page))
         response = HttpResponse(result, content_type="application/json")
         response["Access-Control-Allow-Origin"] = "*"
         return response
@@ -85,10 +90,12 @@ def circleoneinfo(request):
 @csrf_exempt
 def sendcomment(request):
     try:
-        UserPhone = request.GET.get('UserPhone')
-        SecretKey = request.GET.get('SecretKey')
-        CircleId = request.GET.get('CircleId')
-        Comment = request.GET.get('Comment')
+        UserPhone = request.POST.get('UserPhone')
+        SecretKey = request.POST.get('SecretKey')
+        CircleId = request.POST.get('CircleId')
+        Comment = request.POST.get('Comment')
+        print(UserPhone)
+        print(SecretKey)
         state, user = islog(UserPhone, SecretKey)
         if state == 1:
             C = circle()
@@ -112,7 +119,8 @@ def commentinfo(request):
         SecretKey = request.GET.get('SecretKey')
         CircleId = request.GET.get('CircleId')
         state, user = islog(UserPhone, SecretKey)
-        if state == 1:
+        if state == 1 and CircleId:
+            CircleId = int(CircleId)
             C = circle()
             result = json.dumps(C.getcommit(CircleId=CircleId))
         else:
