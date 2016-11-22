@@ -40,11 +40,12 @@ def getHint(keywords):
                 del res['tips'][0]
                 for i in res['tips']:
                     arr = {
-                        'address': i['address'],
-                        'location': i['location']
+                        'placename': i['name'],
+                        'address': str(i['district']) + str(i['address']),
+                        'location': str(i['location'])
                     }
                     tips.append(arr)
-                num = res['count']
+                num = int(res['count']) - 1
             else:
                 msg = '没有找到相关结果'
                 state = 0

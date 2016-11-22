@@ -22,7 +22,7 @@ def getpersonalinfo(UserId):
             Label1 = u.Label1
             Label2 = u.Label2
             Label3 = u.Label3
-            UserPhotoEx = UserPhoto.replace('?imageView2/0/w/96/h/96/format/png/interlace/1/', '')
+            UserPhotoEx = UserPhoto.replace('?imageView2/0/w/200/h/200/format/png/interlace/1/', '')
             msg = '成功'
             state = 1
         else:

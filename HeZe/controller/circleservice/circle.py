@@ -1,5 +1,6 @@
 from HeZe.models import Circle,User,CircleComment
 from HeZe.bean.upimage import upimage
+from HeZe.controller.userservice.personalinfo import getpersonalinfo
 import datetime
 
 class circle():
@@ -48,17 +49,20 @@ class circle():
             num = len(s)
             circledata = []
             for i in s:
-                u = User.objects.filter(UserId=i.UserId).first()
+                u = getpersonalinfo(i.UserId)
+                Picture = i.Picture.replace('?imageView2/0/w/200/h/200/format/png/interlace/1/', '')
                 arr = {
                     'UserId': i.UserId,
                     'CircleId': i.CircleId,
-                    'NickName': u.NickName,
-                    'UserPhoto': u.UserPhoto,
-                    'SendTime':i.SendTime,
-                    'Picture':i.Picture.split('+'),
-                    'Label1': u.Label1,
-                    'Label2': u.Label2,
-                    'Label3': u.Label3,
+                    'NickName': u['NickName'],
+                    'UserPhoto': u['UserPhoto'],
+                    'UserPhotoEx': u['UserPhotoEx'],
+                    'SendTime': i.SendTime,
+                    'Picture': i.Picture.split('+'),
+                    'PictureEx': Picture.split('+'),
+                    'Label1': u['Label1'],
+                    'Label2': u['Label2'],
+                    'Label3': u['Label3'],
                     'Information': i.Information,
                 }
                 circledata.append(arr)

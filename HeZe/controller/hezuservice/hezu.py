@@ -250,10 +250,3 @@ class hezu():
             return array
 
 
-
-
-
-
-
-
-
